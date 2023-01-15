@@ -1,6 +1,8 @@
 #ifndef UTILS_HPP
 #define UTILS_HPP
 
+#include <map>
+
 namespace serial_lib
 {
     namespace utils
@@ -57,12 +59,54 @@ namespace serial_lib
             SEVEN,
             EIGHT
         };
+        /**
+         * @brief Hardware Flow Control
+         * 
+         */
+        enum class HFC
+        {
+            ON,
+            OFF
+        };
 
-        enum PortState
+        /**
+         * @brief Software Flow Control
+         * 
+         */
+        enum class SFC
+        {
+            ON,
+            OFF
+        };
+
+        enum class PortState
         {
             OPENED,
             CLOSED
         };
+
+        class Utils
+        {
+            public:
+
+            Utils();
+
+            int getBaudRateAsInt(const BaudRate& baud_rate);
+
+            int getDataBitsAsInt(const DataBits& num_data_bits);
+
+            private:
+
+            std::map<BaudRate, int> m_BaudRateMap;
+
+            std::map<DataBits, int> m_DataBitsMap;
+
+            void initBaudRateMap();
+
+            void initDataBitsMap();
+
+        };
+
     }
 }
 
